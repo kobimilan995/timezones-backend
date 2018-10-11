@@ -28,10 +28,12 @@ Route::middleware('jwt.auth')->group(function() {
     });
 });
 
-Route::middleware('jwt.auth', 'jwt.admin')->group(function() {
-    Route::get('/admin/test', function() {
-        return 'TEST';
-    });
+Route::prefix('admin')->middleware('jwt.auth', 'jwt.admin')->group(function() {
+    Route::get('/users', 'api\UsersController@index');
+    Route::post('/users', 'api\UsersController@store');
+    Route::get('/users/{user_id}', 'api\UsersController@show');
+    Route::put('/users/{user_id}', 'api\UsersController@update');
+    Route::delete('/users/{user_id}', 'api\UsersController@destroy');
 });
 
 

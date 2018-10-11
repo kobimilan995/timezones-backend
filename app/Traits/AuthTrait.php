@@ -31,4 +31,18 @@ trait AuthTrait {
         INNER JOIN roles ON users.role_id = roles.role_id
         WHERE users.email = '{$email}'");
     }
+
+
+    public function getAllUsers() {
+        return DB::select("SELECT id, first_name, last_name, email, role_name 
+        FROM users 
+        INNER JOIN roles ON users.role_id = roles.role_id");
+    }
+
+    public function getFilteredUsers($query) {
+        return DB::select("SELECT id, first_name, last_name, email, role_name 
+        FROM users 
+        INNER JOIN roles ON users.role_id = roles.role_id
+        WHERE users.first_name LIKE '%{$query}%' OR users.last_name LIKE '%{$query}%'");
+    }
 }

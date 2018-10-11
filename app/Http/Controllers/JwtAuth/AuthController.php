@@ -60,13 +60,6 @@ class AuthController extends Controller
             ], 400);
         }
         $data = $this->findByEmailWithRole($request->email);
-
-        if(!$data) {
-            return response()->json([
-                'type' => 'error',
-                'message' => 'Email not found!'
-            ], 400);
-        }
         $user = $data[0];
 
         if(Hash::check($request->password, $user->password)) {
