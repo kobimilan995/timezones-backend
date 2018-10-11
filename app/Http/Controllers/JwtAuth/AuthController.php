@@ -67,7 +67,6 @@ class AuthController extends Controller
                 'message' => 'Email not found!'
             ], 400);
         }
-        return 'asd';
         $user = $data[0];
 
         if(Hash::check($request->password, $user->password)) {
@@ -78,8 +77,9 @@ class AuthController extends Controller
             return response()->json([
                 'type' => 'success',
                 'message' => 'Sucessfully logged in!',
+                'token' => $token,
                 'user' => $user
-            ], 200)->header('Authorization ', $token);
+            ], 200);
         }
         return response()->json([
             'type' => 'error',
