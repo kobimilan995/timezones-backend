@@ -67,7 +67,7 @@ class AuthController extends Controller
                 'message' => 'Email not found!'
             ], 400);
         }
-
+        return 'asd';
         $user = $data[0];
 
         if(Hash::check($request->password, $user->password)) {
