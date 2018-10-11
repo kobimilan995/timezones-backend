@@ -73,6 +73,7 @@ class AuthController extends Controller
         if(Hash::check($request->password, $user->password)) {
             unset($user->password);
             $token = $this->genJWT($user);
+            $this->deleteTokenData($user);
             $this->storeTokenData($token, $user, time()+60*60);
             return response()->json([
                 'type' => 'success',

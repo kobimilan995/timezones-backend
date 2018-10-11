@@ -17,6 +17,10 @@ trait AuthTrait {
         return DB::insert("INSERT INTO tokens (jwt_token, user_id, expire_date) values ('{$token}', {$user->id}, {$expire_date})");
     }
 
+    public function deleteTokenData($user) {
+        return DB::delete("DELETE FROM tokens WHERE user_id='{$user->id}'");
+    }
+
     public function findByEmail($email) {
         return DB::select("SELECT * FROM users WHERE email = '{$email}'");
     }
