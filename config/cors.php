@@ -13,7 +13,7 @@ return [
     */
    
     'supportsCredentials' => false,
-    'allowedOrigins' => ['https://timezones-vue.herokuapp.com', 'http://localhost:8000'],
+    'allowedOrigins' => ['https://timezones-vue.herokuapp.com', 'http://localhost:8080'],
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['*'],
