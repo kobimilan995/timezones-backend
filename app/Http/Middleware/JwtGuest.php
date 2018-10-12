@@ -21,6 +21,9 @@ class JwtGuest
     {
         $key = env('SECRET_KEY');
         $token = $request->bearerToken();
+        // return response()->json([
+        //     'message' => $token
+        // ], 200);
         if(!$token) {
             return $next($request);
         } else {
