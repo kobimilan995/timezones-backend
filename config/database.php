@@ -7,6 +7,11 @@ $username = $url["user"];
 $password = $url["pass"];
 $database = substr($url["path"], 1);
 
+// $host = '127.0.0.1';
+// $username = 'kobicarr';
+// $password = 'yrosevic111';
+// $database = 'time_zones';
+
 return [
 
     /*

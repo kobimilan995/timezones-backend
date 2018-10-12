@@ -37,7 +37,19 @@ class UsersController extends Controller
 
     public function destroy($user_id)
     {
+        $success = $this->deleteUserWithId($user_id);
 
+        if($success) {
+            return response()->json([
+                'type' => 'success',
+                'message' => 'User succesfully deleted'
+            ]);
+        }
+        
+        return response()->json([
+          'type' => 'error',
+          'data' => ['errors' => ['User does not exist']]  
+        ], 400);
     }
 }
 

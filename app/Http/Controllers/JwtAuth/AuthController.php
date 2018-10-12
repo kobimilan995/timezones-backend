@@ -65,8 +65,8 @@ class AuthController extends Controller
         if(Hash::check($request->password, $user->password)) {
             unset($user->password);
             $token = $this->genJWT($user);
-            $this->deleteTokenData($user);
-            $this->storeTokenData($token, $user, time()+60*60);
+            // $this->deleteTokenData($user);
+            // $this->storeTokenData($token, $user, time()+60*60);
             return response()->json([
                 'type' => 'success',
                 'message' => 'Sucessfully logged in!',
@@ -91,7 +91,7 @@ class AuthController extends Controller
             // $token_data = DB::select("SELECT *
             //  FROM tokens
             //  WHERE user_id = '{$user_id}'");
-            DB::delete("DELETE FROM tokens WHERE user_id='{$user_id}'");
+            // DB::delete("DELETE FROM tokens WHERE user_id='{$user_id}'");
             return response()->json([
                 'type' => 'success',
                 'message' => 'Succesfully logged out!'
@@ -113,7 +113,7 @@ class AuthController extends Controller
         $key = env('SECRET_KEY');
         $payload = array(
           "id" => $user->id,
-          "time" => time()
+          "exp" => time() + 60*60
         );
 
         return JWT::encode($payload, $key);

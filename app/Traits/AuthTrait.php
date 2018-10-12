@@ -45,4 +45,9 @@ trait AuthTrait {
         INNER JOIN roles ON users.role_id = roles.role_id
         WHERE users.first_name LIKE '%{$query}%' OR users.last_name LIKE '%{$query}%'");
     }
+
+    public function deleteUserWithId($user_id) {
+        return DB::delete("DELETE FROM users
+        WHERE id = {$user_id}");
+    }
 }
