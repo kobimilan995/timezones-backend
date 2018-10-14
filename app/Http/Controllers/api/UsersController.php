@@ -20,11 +20,6 @@ class UsersController extends Controller
             'users' => $user_data
         ]);
     }
-
-    public function store()
-    {
-
-    }
     
     public function show($user_id)
     {

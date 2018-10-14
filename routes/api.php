@@ -36,6 +36,11 @@ Route::prefix('admin')->middleware('jwt.auth', 'jwt.admin')->group(function() {
     Route::delete('/users/{user_id}', 'api\UsersController@destroy');
 });
 
+Route::prefix('time_zones')->middleware('jwt.auth')->group(function() {
+    Route::post('/', 'api\TimeZonesController@store');
+    Route::get('/', 'api\TimeZonesController@index');
+});
+
 
 Route::get('/gmdate', function() {
     date_default_timezone_set('UTC');

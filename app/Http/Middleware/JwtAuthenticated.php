@@ -31,22 +31,6 @@ class JwtAuthenticated
                     'data' => ['errors' => ['Unauthorized']]
                 ], 401);
             }
-
-            // if($user_data[0]->expire_date < time()) {
-            //     DB::delete("DELETE FROM tokens WHERE user_id = '{$user_data[0]->id}'");
-            //     return response()->json([
-            //         'type' => 'error',
-            //         'data' => ['errors' => ['Unauthorized']]
-            //     ], 401);
-            // }
-
-            // if($user_data[0]->jwt_token != $token) {
-            //     DB::delete("DELETE FROM tokens WHERE user_id = '{$user_data[0]->id}'");
-            //     return response()->json([
-            //         'type' => 'error',
-            //         'data' => ['errors' => ['Unauthorized']]
-            //     ], 401);
-            // }
             $request['user'] = $user_data[0];
             return $next($request);
         } catch (\Exception $e) {
