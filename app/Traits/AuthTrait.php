@@ -21,8 +21,23 @@ trait AuthTrait {
         return DB::delete("DELETE FROM tokens WHERE user_id='{$user->id}'");
     }
 
+    public function updateById($id, $data) {
+        return DB::update("UPDATE users
+        SET first_name = '{$data['first_name']}' , last_name = '{$data['last_name']}', email='{$data['email']}', role_id={$data['role_id']} WHERE id = {$data['id']}");
+    }
+
     public function findByEmail($email) {
         return DB::select("SELECT * FROM users WHERE email = '{$email}'");
+    }
+
+    public function findById($id) {
+        return DB::select("SELECT id, email, first_name, last_name, role_id
+        FROM users 
+        WHERE users.id = {$id}");
+    }
+
+    public function getUserRoles() {
+        return DB::select("SELECT * FROM roles");
     }
 
     public function findByEmailWithRole($email) {
