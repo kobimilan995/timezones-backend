@@ -39,6 +39,9 @@ Route::prefix('admin')->middleware('jwt.auth', 'jwt.admin')->group(function() {
 Route::prefix('time_zones')->middleware('jwt.auth')->group(function() {
     Route::post('/', 'api\TimeZonesController@store');
     Route::get('/', 'api\TimeZonesController@index');
+    Route::get('{timezone_id}', 'api\TimeZonesController@show');
+    Route::put('{timezone_id}', 'api\TimeZonesController@update');
+    Route::delete('{timezone_id}', 'api\TimeZonesController@destroy');
 });
 
 

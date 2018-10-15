@@ -24,4 +24,20 @@ trait TimeZonesTrait {
         WHERE tz_user_id = {$user_id} AND tz_name LIKE '%{$query}%'");
     }
 
+
+    public function findById($tz_id) {
+        return DB::select("SELECT *
+        FROM time_zones 
+        WHERE tz_id = {$tz_id}");
+    }
+
+    public function updateById($tz_id, $data) {
+        return DB::update("UPDATE time_zones
+        SET tz_name = '{$data['name']}' , tz_city = '{$data['city']}', tz_gmt_diff={$data['gmt_differance']} WHERE tz_id = {$tz_id}");
+    }
+
+    public function deleteById($tz_id) {
+        return DB::delete("DELETE FROM time_zones WHERE tz_id={$tz_id}");
+    }
+
 }
