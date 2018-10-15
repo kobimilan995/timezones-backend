@@ -18,10 +18,23 @@ trait TimeZonesTrait {
         WHERE tz_user_id = {$user_id}");
     }
 
+    public function getAllTimeZones() {
+        return DB::select("SELECT tz_id, tz_name, tz_city, tz_gmt_diff, tz_user_id, first_name, last_name 
+        FROM time_zones
+        INNER JOIN users ON time_zones.tz_user_id = users.id");
+    }
+
     public function getFilteredUsersTimeZones($user_id, $query) {
         return DB::select("SELECT *
         FROM time_zones
         WHERE tz_user_id = {$user_id} AND tz_name LIKE '%{$query}%'");
+    }
+
+    public function getFilteredAllTimeZones($query) {
+        return DB::select("SELECT tz_id, tz_name, tz_city, tz_gmt_diff, tz_user_id, first_name, last_name 
+        FROM time_zones
+        INNER JOIN users ON time_zones.tz_user_id = users.id
+        WHERE tz_name LIKE '%{$query}%'");
     }
 
 

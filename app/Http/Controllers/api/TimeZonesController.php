@@ -14,8 +14,12 @@ class TimeZonesController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('search_query');
-        $user_id = $request['user']->id;
-        $timeZonesData = $query ? $this->getFilteredUsersTimeZones($user_id, $query) : $this->getUsersTimeZones($user_id);
+        $user = $request['user'];
+        if($user->role_name != 'Admin') {
+            $timeZonesData = $query ? $this->getFilteredUsersTimeZones($user->id, $query) : $this->getUsersTimeZones($user->id);
+        } else {
+            $timeZonesData = $query ? $this->getFilteredAllTimeZones($query) : $this->getAllTimeZones();
+        }
 
         return response()->json([
             'type' => 'success',
@@ -58,7 +62,7 @@ class TimeZonesController extends Controller
 
         $auth_user = $request['user'];
 
-        if($auth_user->id != $time_zone_data[0]->tz_user_id) {
+        if($auth_user->id != $time_zone_data[0]->tz_user_id && $auth_user->role_name != 'Admin') {
             return response()->json([
                 'type' => 'error',
                 'data' => ['errors' => ['Forbidden!']]  
@@ -87,12 +91,21 @@ class TimeZonesController extends Controller
             ], 400);
         }
         $time_zone_data = $this->findById($tz_id);
+        
 
         if(!$time_zone_data) {
             return response()->json([
                 'type' => 'error',
                 'data' => ['errors' => ['Specified time zone does not exist!']]  
             ], 400);
+        }
+
+        $auth_user = $request['user'];
+        if($auth_user->id != $time_zone_data[0]->tz_user_id && $auth_user->role_name != 'Admin') {
+            return response()->json([
+                'type' => 'error',
+                'data' => ['errors' => ['Forbidden! You are not the owner of this time zone.']]  
+              ], 403);
         }
 
         $bool = $this->updateById($tz_id, $request->all());
@@ -108,7 +121,7 @@ class TimeZonesController extends Controller
     {
         $time_zone_data = $this->findById($tz_id);
         $auth_user = $request['user'];
-        if($auth_user->id != $time_zone_data[0]->tz_user_id) {
+        if($auth_user->id != $time_zone_data[0]->tz_user_id && $auth_user->role_name != 'Admin') {
             return response()->json([
                 'type' => 'error',
                 'data' => ['errors' => ['Forbidden! You are not the owner of this time zone.']]  
