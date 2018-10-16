@@ -14,16 +14,19 @@ class TimeZonesController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('search_query');
+        $current_page = $request->input('current_page');
+        $per_page = $request->input('per_page');
         $user = $request['user'];
         if($user->role_name != 'Admin') {
-            $timeZonesData = $query ? $this->getFilteredUsersTimeZones($user->id, $query) : $this->getUsersTimeZones($user->id);
+            $db_data = $query ? $this->getFilteredUsersTimeZones($user->id, $query, $current_page, $per_page) : $this->getUsersTimeZones($user->id, $current_page, $per_page);
         } else {
-            $timeZonesData = $query ? $this->getFilteredAllTimeZones($query) : $this->getAllTimeZones();
+            $db_data = $query ? $this->getFilteredAllTimeZones($query, $current_page, $per_page) : $this->getAllTimeZones($current_page, $per_page);
         }
 
         return response()->json([
             'type' => 'success',
-            'time_zones' => $timeZonesData
+            'time_zones' => $db_data['time_zones'],
+            'count' => $db_data['count'][0]
         ]);
     }
 
