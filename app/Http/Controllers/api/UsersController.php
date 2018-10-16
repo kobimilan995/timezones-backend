@@ -13,11 +13,14 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('query');
-        $user_data = $query ? $this->getFilteredUsers($query) : $this->getAllUsers();
+        $current_page = $request->input('current_page');
+        $per_page = $request->input('per_page');
+        $db_data = $query ? $this->getFilteredUsers($query, $current_page, $per_page) : $this->getAllUsers($current_page, $per_page);
 
         return response()->json([
             'type' => 'success',
-            'users' => $user_data
+            'users' => $db_data['users'],
+            'count' => $db_data['count'][0]
         ]);
     }
     
