@@ -14,7 +14,8 @@
         "fideloper/proxy": "^4.0",
         "firebase/php-jwt": "^5.0",
         "laravel/framework": "5.7.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "masterro/laravel-xss-filter": "^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

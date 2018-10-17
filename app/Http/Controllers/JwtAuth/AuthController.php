@@ -65,8 +65,6 @@ class AuthController extends Controller
         if(Hash::check($request->password, $user->password)) {
             unset($user->password);
             $token = $this->genJWT($user);
-            // $this->deleteTokenData($user);
-            // $this->storeTokenData($token, $user, time()+60*60);
             return response()->json([
                 'type' => 'success',
                 'message' => 'Sucessfully logged in!',
@@ -78,34 +76,6 @@ class AuthController extends Controller
             'type' => 'error',
             'data' => ['errors' => ['Password is incorrect!']]
         ], 400);
-    }
-
-    //METHOD FOR LOGGING OUT
-    public function logout(Request $request) {
-        $key = env('SECRET_KEY');
-        $token = $request->bearerToken();
-
-        try {
-            $decoded = (array) JWT::decode($token, $key, array('HS256'));
-            $user_id = $decoded['id'];
-            // $token_data = DB::select("SELECT *
-            //  FROM tokens
-            //  WHERE user_id = '{$user_id}'");
-            // DB::delete("DELETE FROM tokens WHERE user_id='{$user_id}'");
-            return response()->json([
-                'type' => 'success',
-                'message' => 'Succesfully logged out!'
-            ], 200); 
-             
-        } catch (\Exception $e) {
-            return response()->json([
-                'type' => 'error',
-                'data' => ['errors' => [$e->getMessage()]]
-            ], 401);
-        }
-
-
-        return $token;
     }
 
     //METHOD FOR GENERATING JWT

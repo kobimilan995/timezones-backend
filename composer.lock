@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c34997f537b0ae4f9639e88a096004ce",
+    "content-hash": "bdce7108035b1ecfe2337d9dfad3a767",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -946,6 +946,62 @@
                 "storage"
             ],
             "time": "2018-09-14T15:30:29+00:00"
+        },
+        {
+            "name": "masterro/laravel-xss-filter",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MasterRO94/laravel-xss-filter.git",
+                "reference": "ba29fa834f7eb25b6d8b6ad0df2d6e0ec30b9bbe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MasterRO94/laravel-xss-filter/zipball/ba29fa834f7eb25b6d8b6ad0df2d6e0ec30b9bbe",
+                "reference": "ba29fa834f7eb25b6d8b6ad0df2d6e0ec30b9bbe",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.4,<5.8",
+                "php": ">=7.0.9"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MasterRO\\LaravelXSSFilter\\XSSFilterServiceProvider"
+                    ],
+                    "aliases": {
+                        "XSSCleaner": "MasterRO\\LaravelXSSFilter\\XSSCleanerFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MasterRO\\LaravelXSSFilter\\": "src/",
+                    "MasterRO\\LaravelXSSFilter\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Ihoshyn",
+                    "email": "igoshin18@gmail.com"
+                }
+            ],
+            "description": "Filter user input for XSS but don't tuuch other html",
+            "keywords": [
+                "laravel",
+                "middleware",
+                "xss"
+            ],
+            "time": "2018-09-26T07:50:54+00:00"
         },
         {
             "name": "monolog/monolog",

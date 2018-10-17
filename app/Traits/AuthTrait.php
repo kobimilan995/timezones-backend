@@ -36,8 +36,9 @@ trait AuthTrait {
     }
 
     public function findById($id) {
-        return DB::select("SELECT id, email, first_name, last_name, role_id
-        FROM users 
+        return DB::select("SELECT id, email, first_name, last_name, users.role_id, role_name
+        FROM users
+        INNER JOIN roles on users.role_id = roles.role_id 
         WHERE users.id = :id", ['id' => $id]);
     }
 

@@ -35,7 +35,7 @@ trait TimeZonesTrait {
 
     public function getAllTimeZones($current_page, $per_page) {
         $offset = ($current_page-1) * $per_page;
-        $db_data = DB::select("SELECT SQL_CALC_FOUND_ROWS tz_id, tz_name, tz_city, tz_gmt_diff, tz_user_id, first_name, last_name 
+        $db_data = DB::select("SELECT SQL_CALC_FOUND_ROWS tz_id, tz_name, tz_city, tz_gmt_diff, tz_user_id, first_name, last_name
         FROM time_zones
         INNER JOIN users ON time_zones.tz_user_id = users.id LIMIT :offset, :per_page", [
             'per_page' => $per_page,
@@ -67,7 +67,7 @@ trait TimeZonesTrait {
 
     public function getFilteredAllTimeZones($query, $current_page, $per_page) {
         $offset = ($current_page-1) * $per_page;
-        $db_data = DB::select("SELECT SQL_CALC_FOUND_ROWS tz_id, tz_name, tz_city, tz_gmt_diff, tz_user_id, first_name, last_name 
+        $db_data = DB::select("SELECT SQL_CALC_FOUND_ROWS tz_id, tz_name, tz_city, tz_gmt_diff, tz_user_id, first_name, last_name
         FROM time_zones
         INNER JOIN users ON time_zones.tz_user_id = users.id
         WHERE tz_name LIKE :query LIMIT :offset, :per_page", [
