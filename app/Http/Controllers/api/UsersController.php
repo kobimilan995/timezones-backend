@@ -74,8 +74,14 @@ class UsersController extends Controller
         ]);
     }
 
-    public function destroy($user_id)
+    public function destroy($user_id, Request $request)
     {
+        if($user_id == $request['user']->id) {
+            return response()->json([
+                'type' => 'error',
+                'data' => ['errors' => ['You cannot delete yourself!']]  
+              ], 400);
+        }
         $success = $this->deleteUserWithId($user_id);
 
         if($success) {

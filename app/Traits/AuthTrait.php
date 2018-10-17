@@ -47,7 +47,7 @@ trait AuthTrait {
     }
 
     public function findByEmailWithRole($email) {
-        return DB::select("SELECT * 
+        return DB::select("SELECT id, first_name, last_name, email, role_name, password
         FROM users 
         INNER JOIN roles ON users.role_id = roles.role_id
         WHERE users.email = :email", ['email' => $email]);
