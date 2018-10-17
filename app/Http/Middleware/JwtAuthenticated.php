@@ -18,7 +18,7 @@ class JwtAuthenticated
      */
     public function handle($request, Closure $next)
     {
-        $key = env('SECRET_KEY');
+        $key = env('SECRET_KEY')?:getenv('SECRET_KEY');
         $token = $request->bearerToken();
         try {
             $decoded = (array) JWT::decode($token, $key, array('HS256'));
