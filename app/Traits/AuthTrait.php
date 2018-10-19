@@ -9,7 +9,7 @@ trait AuthTrait {
     public function storeUser($credentials, $role_name) {
         $bcryptedPassword = bcrypt($credentials['password']);
 
-        $role_id = DB::select("SELECT role_id FROM roles where role_name = '{$role_name}'")[0]->role_id;
+        $role_id = DB::select("SELECT role_id FROM roles where role_name = :role_name", ['role_name' => $role_name])[0]->role_id;
         return DB::insert("INSERT INTO users (email, first_name, last_name, password, role_id) 
         values (:email, :first_name, :last_name, :password, :role_id)", [
             'email' => $credentials['email'],
